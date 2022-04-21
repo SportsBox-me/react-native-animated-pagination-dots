@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Animated,
   StyleSheet,
-  useWindowDimensions,
   View,
   ViewStyle,
 } from 'react-native';
@@ -33,7 +32,7 @@ const SlidingDot = ({
     dotSize: dotSize || 12,
     marginHorizontal: marginHorizontal || 3,
   };
-  
+
   const [translateX, set_translateX] = useState(scrollX.interpolate({inputRange, outputRange: [-0, 0, 0]}));
 
   const calculate_translateX = () => {

@@ -1,10 +1,10 @@
 {
   "name": "react-native-animated-pagination-dots",
-  "version": "0.1.72",
+  "version": "0.1.0",
   "description": "FlatList animated pagination dots",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
-  "types": "lib/typescript/src/index.d.ts",
+  "types": "lib/typescript/index.d.ts",
   "react-native": "src/index",
   "source": "src/index",
   "files": [
@@ -13,8 +13,10 @@
     "android",
     "ios",
     "cpp",
-    "react-native-animated-pagination-dots.podspec",
+    "react-native-awesome-module.podspec",
     "!lib/typescript/example",
+    "!android/build",
+    "!ios/build",
     "!**/__tests__",
     "!**/__fixtures__",
     "!**/__mocks__"
@@ -41,26 +43,30 @@
     "url": "https://github.com/weahforsage/react-native-animated-pagination-dots/issues"
   },
   "homepage": "https://github.com/weahforsage/react-native-animated-pagination-dots#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "devDependencies": {
-    "@commitlint/config-conventional": "^8.3.4",
-    "@react-native-community/bob": "^0.16.2",
+    "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^2.0.0",
-    "@release-it/conventional-changelog": "^1.1.4",
-    "@types/jest": "^26.0.0",
-    "@types/react": "^16.9.19",
-    "@types/react-native": "0.62.13",
-    "commitlint": "^8.3.5",
+    "@release-it/conventional-changelog": "^2.0.0",
+    "@types/jest": "^27.4.1",
+    "@types/react": "^18.0.5",
+    "@types/react-native": "^0.67.4",
+    "@types/react-test-renderer": "^18.0.0",
+    "commitlint": "^11.0.0",
     "eslint": "^7.2.0",
-    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "husky": "^4.2.5",
+    "husky": "^6.0.0",
     "jest": "^26.0.1",
     "pod-install": "^0.1.0",
     "prettier": "^2.0.5",
-    "react": "16.11.0",
-    "react-native": "0.62.2",
-    "release-it": "^13.5.8",
-    "typescript": "^3.8.3"
+    "react": "16.13.1",
+    "react-native": "0.63.4",
+    "react-native-builder-bob": "^0.18.0",
+    "release-it": "^14.2.2",
+    "typescript": "^4.6.3"
   },
   "peerDependencies": {
     "react": "*",
@@ -72,12 +78,6 @@
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint && yarn typescript"
-    }
   },
   "commitlint": {
     "extends": [
@@ -102,6 +102,7 @@
     }
   },
   "eslintConfig": {
+    "root": true,
     "extends": [
       "@react-native-community",
       "prettier"
@@ -130,16 +131,21 @@
     "trailingComma": "es5",
     "useTabs": false
   },
-  "@react-native-community/bob": {
+  "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
     "targets": [
       "commonjs",
       "module",
-      "typescript"
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
     ]
   },
   "dependencies": {
-    "react-native-svg": "^12.1.0"
+    "react-native-svg": "^12.3.0"
   }
 }
