@@ -34,7 +34,7 @@ const SlidingDot = ({
     marginHorizontal: marginHorizontal || 3,
   };
   
-  const [translateX, set_translateX] = useState(inputRange);
+  const [translateX, set_translateX] = useState(scrollX.interpolate({inputRange, outputRange: [-0, 0, 0]}));
 
   const calculate_translateX = () => {
     set_translateX(
