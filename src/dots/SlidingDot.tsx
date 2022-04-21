@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "react";
-import {
-  Animated,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Animated, StyleSheet, View, ViewStyle } from 'react-native';
+
 export interface SlidingDotProps {
   data: Array<Object>;
   scrollX: Animated.Value;
@@ -14,6 +10,7 @@ export interface SlidingDotProps {
   dotContainerStyle?: ViewStyle;
   slidingIndicatorStyle?: ViewStyle;
   marginHorizontal?: number;
+  width?: number;
 }
 
 let inputRange = [-0, 0, 0];
@@ -26,14 +23,16 @@ const SlidingDot = ({
   dotStyle,
   slidingIndicatorStyle,
   marginHorizontal,
+  width,
 }: SlidingDotProps) => {
-
   const defaultProps = {
     dotSize: dotSize || 12,
     marginHorizontal: marginHorizontal || 3,
   };
 
-  const [translateX, set_translateX] = useState(scrollX.interpolate({inputRange, outputRange: [-0, 0, 0]}));
+  const [translateX, set_translateX] = useState(
+    scrollX.interpolate({ inputRange, outputRange: [-0, 0, 0] })
+  );
 
   const calculate_translateX = () => {
     set_translateX(
@@ -45,12 +44,12 @@ const SlidingDot = ({
           defaultProps.dotSize + defaultProps.marginHorizontal * 2,
         ],
       })
-    )
-  }
+    );
+  };
 
   useEffect(() => {
-    calculate_translateX()
-  }, [scrollX])
+    calculate_translateX();
+  }, [scrollX]);
 
   return (
     <View
@@ -60,9 +59,9 @@ const SlidingDot = ({
         containerStyle,
       ]}
       onLayout={(event) => {
-        const width = event.nativeEvent.layout?.width
-        if (width) {
-          inputRange = [-width, 0, width];
+        const width_ = width ? width : event.nativeEvent.layout?.width;
+        if (width_) {
+          inputRange = [-width_, 0, width_];
           calculate_translateX();
         }
       }}
